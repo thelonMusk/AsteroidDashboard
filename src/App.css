@@ -1,38 +1,226 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* General layout */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom right, #0f111a, #2c1053, #0f111a);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Container */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Header */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.dashboard-header h1 {
+  font-size: 3rem;
+  background: linear-gradient(to right, #ff4d4d, #ffcc00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 0.5rem 0;
+}
+
+.dashboard-header p {
+  color: #ccc;
+  font-size: 1.2rem;
+}
+
+/* Controls Section */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.controls label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  color: #aaa;
+}
+
+.controls select,
+.controls input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  font-size: 1rem;
+}
+
+.controls input::placeholder {
+  color: #aaa;
+}
+
+.controls button {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(to right, #6a0dad, #ff0080);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.controls button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Stats Section */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.05);
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.stat-card .number {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.stat-card .label {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+/* Asteroid Card */
+.asteroid-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.asteroid-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+.asteroid-card .asteroid-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-bottom: 1rem;
+}
+
+.asteroid-card .badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.badge.hazardous {
+  background: #ff4d4d;
+  color: white;
+}
+
+.badge.safe {
+  background: #4caf50;
+  color: white;
+}
+
+.asteroid-card .closest {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  background: #ffd700;
+  color: black;
+}
+
+.asteroid-card .asteroid-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+}
+
+.asteroid-card .asteroid-info div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.asteroid-card .asteroid-info div:last-child {
+  border-bottom: none;
+}
+
+.asteroid-card .asteroid-info span.label {
+  color: #aaa;
+}
+
+/* Error & Loading */
+.error-message {
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid #ff4d4d;
+  border-radius: 16px;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #ccc;
+}
+
+.loading .icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
